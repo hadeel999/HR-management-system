@@ -72,9 +72,6 @@ function handleSubmit(event){
     let newEmp=new Employee(0,fName,dep,lev,img,0);
     newEmp.generateID();
     newEmp.calculateSalary();
-    newEmp.render();
-    emploees.push(newEmp);
-
 }
 
 
@@ -86,7 +83,7 @@ let omar=new Employee(1004,"Omar Zaid","Development","Senior","Pictures/emp2.jpg
 let rana=new Employee(1005,"Rana Saleh","Development","Junior","Pictures/emp7.png",0);
 let hadi=new Employee(1006,"Hadi Ahmad","Finance","Mid-Senior","Pictures/emp3.jpg",0);
 
-for(let i=0;i<emploees.length;i++){
+for(let i=0;i<=emploees.length-1;i++){
     emploees[i].generateID();
     emploees[i].calculateSalary();
     emploees[i].render();
