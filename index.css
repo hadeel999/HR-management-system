@@ -1,0 +1,71 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*{
+    font-family: 'Roboto',sans-serif;
+}
+
+html{
+    
+scroll-behavior: smooth;
+}
+
+header{
+    background-color: rgb(247, 200, 208);
+    display: flex;
+    padding: 1rem ;
+    align-items:flex-start;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 2rem;
+}
+
+body{
+    padding: 3rem;
+    align-items: center;
+}
+
+section{
+    padding: 3rem, 7%;
+} 
+
+a{
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+
+#formID{
+    text-align: center;
+    align-items:center;
+    padding: 1rem;
+    background-color: rgb(253, 229, 233);
+    font-size: 1.5rem;
+}
+
+select,button{
+    align-items:center;
+    font-size: 1rem;
+}
+
+
+#myMain{
+    display: flex;
+    justify-content:space-between;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    align-items: center;
+    padding: 2rem;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+footer{
+    background-color: rgb(247, 200, 208);
+    padding: 1rem ;
+    text-align:center;
+    padding: 2rem;
+}
+
