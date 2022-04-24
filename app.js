@@ -2,6 +2,8 @@
 let emploees=[];
 let formEl=document.getElementById("formID");
 let mainEl=document.getElementById("myMain");
+let divEl=document.getElementById("cardDiv");
+
 
 
 function Employee(emploeeID,fullName,department,level,imageURL,salary){
@@ -27,14 +29,30 @@ Employee.prototype.calculateSalary= function(){
 
 Employee.prototype.render= function(){
   //  document.write(`<h2>Employee name is: ${this.fullName} and his/her salary is: ${this.salary}</h2>`);
+    
+    let card=document.createElement('div');
+   // mainEl.appendChild(card);
+   mainEl.appendChild(card);
+    
     let img=document.createElement('img');
     img.src=this.imageURL;
     img.width="250";
     img.height="250";
-    mainEl.appendChild(img);
+    card.appendChild(img);
 
-    let list=document.createElement('ul');
-    mainEl.appendChild(list);
+    let appendOne=document.createElement('h5');
+    appendOne.textContent=`Name: ${this.fullName} - ID: ${this.emploeeID}`;
+    card.appendChild(appendOne);
+
+    let appendTwo=document.createElement('h5');
+    appendTwo.textContent=`Department: ${this.department} - Level: ${this.level}`;
+    card.appendChild(appendTwo);
+
+    let sal=document.createElement('h5');
+    sal.textContent=this.salary;
+    card.appendChild(sal);
+   /* let list=document.createElement('ul');
+    divEl.appendChild(list);
 
     let appendOne=document.createElement('p');
     appendOne.textContent=`Name: ${this.fullName} - ID: ${this.emploeeID}`;
@@ -46,8 +64,8 @@ Employee.prototype.render= function(){
 
     let sal=document.createElement('p');
     sal.textContent=this.salary;
-    list.appendChild(sal);
-
+    list.appendChild(sal);*/
+    
 }
 
 Employee.prototype.generateID= function(){
@@ -72,6 +90,7 @@ function handleSubmit(event){
     let newEmp=new Employee(0,fName,dep,lev,img,0);
     newEmp.generateID();
     newEmp.calculateSalary();
+    newEmp.render();
 }
 
 
