@@ -2,7 +2,7 @@
 let emploees=[];
 let formEl=document.getElementById("formID");
 let mainEl=document.getElementById("myMain");
-let divEl=document.getElementById("cardDiv");
+//let divEl=document.getElementById("cardDiv");
 
 
 
@@ -13,6 +13,7 @@ function Employee(emploeeID,fullName,department,level,imageURL,salary){
     this.level=level;
     this.imageURL=imageURL;
     this.salary=salary;
+
     emploees.push(this);
 }
 
@@ -32,7 +33,7 @@ Employee.prototype.render= function(){
     
     let card=document.createElement('div');
    // mainEl.appendChild(card);
-   mainEl.appendChild(card);
+    mainEl.appendChild(card);
     
     let img=document.createElement('img');
     img.src=this.imageURL;
@@ -51,20 +52,7 @@ Employee.prototype.render= function(){
     let sal=document.createElement('h5');
     sal.textContent=this.salary;
     card.appendChild(sal);
-   /* let list=document.createElement('ul');
-    divEl.appendChild(list);
-
-    let appendOne=document.createElement('p');
-    appendOne.textContent=`Name: ${this.fullName} - ID: ${this.emploeeID}`;
-    list.appendChild(appendOne);
-
-    let appendTwo=document.createElement('p');
-    appendTwo.textContent=`Department: ${this.department} - Level: ${this.level}`;
-    list.appendChild(appendTwo);
-
-    let sal=document.createElement('p');
-    sal.textContent=this.salary;
-    list.appendChild(sal);*/
+   
     
 }
 
@@ -73,11 +61,31 @@ Employee.prototype.generateID= function(){
     for(let i=0;i<=emploees.length-2;i++){
         if(emploees[i].emploeeID==id){
             id=Math.floor(1000 + Math.random() * 9000);
-            i=0
+            i=0;
         }
     }
     this.emploeeID=id;
 }
+
+let ghazi=new Employee(1000,"Ghazi Samer","Administration","Senior","Pictures/emp4.jpg",0);
+let lana=new Employee(1001,"Lana Ali","Finance","Senior","Pictures/emp5.png",0); 
+let tamara=new Employee(1002,"Tamara Ayoub","Marketing","Senior","Pictures/emp6.png",0);
+let safi=new Employee(1003,"Safi Walid","Administration","Mid-Senior","Pictures/emp1.jpg",0);
+let omar=new Employee(1004,"Omar Zaid","Development","Senior","Pictures/emp2.jpg",0);
+let rana=new Employee(1005,"Rana Saleh","Development","Junior","Pictures/emp7.png",0);
+let hadi=new Employee(1006,"Hadi Ahmad","Finance","Mid-Senior","Pictures/emp3.jpg",0);
+
+
+function renderAll() {
+    for (let i = 0; i <= emploees.length-1; i++) {
+        emploees[i].generateID();
+        emploees[i].calculateSalary();
+        emploees[i].render();
+        //emploees[i].renderTable();
+    }
+}
+
+//renderAll();
 
 formEl.addEventListener("submit",handleSubmit);
 
@@ -91,20 +99,40 @@ function handleSubmit(event){
     newEmp.generateID();
     newEmp.calculateSalary();
     newEmp.render();
+    saveData(emploees);
+
 }
 
 
-let ghazi=new Employee(1000,"Ghazi Samer","Administration","Senior","Pictures/emp4.jpg",0);
-let lana=new Employee(1001,"Lana Ali","Finance","Senior","Pictures/emp5.png",0); 
-let tamara=new Employee(1002,"Tamara Ayoub","Marketing","Senior","Pictures/emp6.png",0);
-let safi=new Employee(1003,"Safi Walid","Administration","Mid-Senior","Pictures/emp1.jpg",0);
-let omar=new Employee(1004,"Omar Zaid","Development","Senior","Pictures/emp2.jpg",0);
-let rana=new Employee(1005,"Rana Saleh","Development","Junior","Pictures/emp7.png",0);
-let hadi=new Employee(1006,"Hadi Ahmad","Finance","Mid-Senior","Pictures/emp3.jpg",0);
 
-for(let i=0;i<=emploees.length-1;i++){
-    emploees[i].generateID();
-    emploees[i].calculateSalary();
-    emploees[i].render();
+
+function saveData(data) {
+
+    let stringfiyData = JSON.stringify(data);
+    localStorage.setItem("emps", stringfiyData);
 }
 
+//console.log("before saving to ls", allDrinks);
+
+function getData() {
+    let retrievedData = localStorage.getItem("emps");
+    // console.log(retrievedData);
+    // console.log(typeof retrievedData);
+    let arrayData = JSON.parse(retrievedData);
+    // each object doesn't has access to render method
+    if (arrayData != null) {
+        for (let i = 0; i < arrayData.length; i++) {
+            // reinstantiation: re creating instance
+            new Employee(arrayData[i].emploeeID, arrayData[i].fullName, arrayData[i].department, arrayData[i].level, arrayData[i].imageURL, arrayData[i].salary);
+            if(i!=arrayData.length-1){emploees.pop();}
+            // each obecjt has access to render method and all other Drink methods
+        }
+    }
+
+
+    // console.log("after retrieving from ls", allDrinks);
+    // console.log(typeof arrayData);
+    renderAll();
+}
+
+getData();
