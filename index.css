@@ -28,6 +28,7 @@ body{
 
 section{
     padding: 3rem, 7%;
+    margin: 2rem;
 } 
 
 a{
@@ -50,17 +51,32 @@ select,button{
 }
 
 
+div{
+    padding: 2rem;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:center;
+    background-color:rgb(171, 139, 145);
+    text-align: center;
+}
+
 #myMain{
     display: flex;
-    justify-content:space-between;
-    flex-direction: row;
     flex-wrap: wrap; 
+    justify-content:center;
+    flex-direction: row;
     align-items: center;
     padding: 2rem;
     top: 0;
     right: 0;
     left: 0;
+    background-color:rgb(224, 205, 209);
+    padding: 2rem;
 }
+
+
 
 footer{
     background-color: rgb(247, 200, 208);
